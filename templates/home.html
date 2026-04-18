@@ -1,0 +1,67 @@
+ {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'CSS/style.css' %}">
+</head>
+<body>
+
+
+<div class="dashboard">
+
+    <!-- SIDEBAR -->
+  <div class="sidebar">
+    <h2>Malla Reddy College</h2>
+
+    <a href="{% url 'home' %}">Dashboard</a>
+    <a href="{% url 'add_student' %}">Add Student</a>
+    <a href="{% url 'add_faculty' %}">Add Faculty</a>
+    <a href="{% url 'add_course' %}">Add Course</a>
+    <a href="{% url 'logout' %}">Logout</a>
+</div>
+
+    <!-- MAIN CONTENT -->
+    <div class="main">
+
+        <div class="header">
+            <h2>Student Dashboard</h2>
+        </div>
+
+        <div style="margin-bottom:15px;">
+            <a href="{% url 'add_student' %}" class="btn-add">+ Add Student</a>
+        </div>
+
+        <div class="card">
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Course</th>
+                    <th>Action</th>
+                </tr>
+
+                {% for s in students %}
+                <tr>
+                    <td>{{ s.id }}</td>
+                    <td>{{ s.name }}</td>
+                    <td>{{ s.age }}</td>
+                    <td>{{ s.course }}</td>
+                     
+                    <td>
+                        <a href="{% url 'delete_student' s.id %}" class="btn-delete">Delete</a>
+                      
+                    </td>
+                </tr>
+                {% endfor %}
+
+            </table>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
