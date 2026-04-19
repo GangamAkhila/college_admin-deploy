@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Confirm Deletion | CMS{% endblock %}
+{% block page_title %}Confirm Deletion{% endblock %}
+
+{% block content %}
+<div class="card shadow-sm border-0 mx-auto" style="max-width: 500px; margin-top: 2rem;">
+    <div class="card-body text-center p-5">
+        <div class="text-danger mb-4">
+            <i class="bi bi-exclamation-circle-fill" style="font-size: 4rem;"></i>
+        </div>
+        
+        <h4 class="fw-bold mb-3">Are you sure?</h4>
+        <p class="text-muted mb-4">
+            Do you really want to delete <strong>{{ object }}</strong>? This process cannot be undone.
+        </p>
+
+        <form method="post" class="d-flex justify-content-center gap-3">
+            {% csrf_token %}
+            <a href="javascript:history.back()" class="btn btn-light px-4 border">Cancel</a>
+            <button type="submit" class="btn btn-danger px-4">Yes, Delete It</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,30 +1,51 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="{% static 'CSS/style.css' %}">
-</head>
-<body>
-    <div class="login-page">
+{% extends 'base.html' %}
+{% load widget_tweaks %}
 
-    <div class="login-box">
-        <h1>🎓 MallaReddy College</h1>
-        <p>Admin Login</p>
+{% block title %}Login | College Management{% endblock %}
 
-        <form method="POST">
-            {% csrf_token %}
-            <input type="text" name="username" placeholder="Enter Username">
-            <input type="password" name="password" placeholder="Enter Password">
-            <button type="submit">Login</button>
-        </form>
+{% block content %}
+<div class="d-flex align-items-center justify-content-center h-100 mt-5 pt-5">
+    <div class="card shadow-sm" style="width: 100%; max-width: 400px; border-radius: 1rem;">
+        <div class="card-body p-4 p-sm-5 text-center">
+            
+            <div class="mb-4 text-primary">
+                <i class="bi bi-mortarboard-fill" style="font-size: 3rem;"></i>
+            </div>
+            
+            <h2 class="fw-bold mb-1">Welcome Back</h2>
+            <p class="text-muted mb-4">Please login to your account</p>
 
-        <p class="error">{{ error }}</p>
+            <form method="post">
+                {% csrf_token %}
+                
+                {% if form.non_field_errors %}
+                    <div class="alert alert-danger p-2 small">
+                        {{ form.non_field_errors.0 }}
+                    </div>
+                {% endif %}
+
+                <div class="mb-3 text-start">
+                    <label class="form-label text-muted small fw-bold">Username</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-light border-end-0"><i class="bi bi-person text-muted"></i></span>
+                        {% render_field form.username class="form-control bg-light border-start-0" placeholder="Enter username" %}
+                    </div>
+                </div>
+
+                <div class="mb-4 text-start">
+                    <label class="form-label text-muted small fw-bold">Password</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-light border-end-0"><i class="bi bi-lock text-muted"></i></span>
+                        {% render_field form.password class="form-control bg-light border-start-0" placeholder="Enter password" %}
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100 py-2 mb-3 fw-medium">
+                    Log In
+                </button>
+            </form>
+            
+        </div>
     </div>
-
 </div>
-    
-</body>
-</html>
+{% endblock %}
